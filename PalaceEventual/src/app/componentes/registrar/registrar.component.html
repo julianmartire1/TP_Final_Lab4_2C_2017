@@ -1,0 +1,8 @@
+<br>
+<input type="text" [(ngModel)]="usuario" class="form-control" placeholder="Usuario">
+<br>
+<input type="password" [(ngModel)]="clave" class="form-control" placeholder="Contraseña">
+<br>
+<input type="password" [(ngModel)]="clave2" class="form-control" placeholder="Repetir Contraseña">
+<br>
+<button class="btn btn-success btn-block" (click)="registrar()" [disabled]="usuario == '' || clave == '' || clave2 == '' || clave != clave2 ">Registrar</button>
