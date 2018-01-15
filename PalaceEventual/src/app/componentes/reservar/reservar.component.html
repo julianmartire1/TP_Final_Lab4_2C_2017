@@ -26,6 +26,6 @@
     </div>
   </div>
 </div><br>
-<button class="btn btn-large btn-block btn-success" [disabled]="arrayMesa1 == null || arrayMesa2 == null || local == '' || fecha == '' " (click)="reservar()">Reservar</button>
+<button class="btn btn-large btn-block btn-success" [disabled]="arrayMesa1 == null || arrayMesa2 == null || local == '' || fecha == '' " (click)="guardarReserva()">Reservar</button>
 
-<app-listado-invitados [array]="reserva"></app-listado-invitados>
+<app-listado-invitados [array]="otrareserva"></app-listado-invitados>

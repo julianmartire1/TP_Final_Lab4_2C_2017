@@ -23,6 +23,11 @@ export class PrincipalComponent implements OnInit {
     this.router.navigate(["/Reservar"]);
   }
 
+  misReservas()
+  {
+    this.router.navigate(["/Reservas"]);
+  }
+
   ngOnInit() {
   }
 

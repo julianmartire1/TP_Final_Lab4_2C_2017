@@ -12,6 +12,8 @@ import { MihttpService } from './services/mi-http.service';
 import { RegistrarComponent } from './componentes/registrar/registrar.component';
 import { ErrorComponent } from './componentes/error/error.component';
 import { ListadoInvitadosComponent } from './componentes/listado-invitados/listado-invitados.component';
+import { ReservasComponent } from './componentes/reservas/reservas.component';
+import swal from 'sweetalert';
 
 const appRoutes: Routes = [
   //{ path: 'pagina1' , component: Pagina1Component , canActivate: [VerificarJWTService] },
@@ -20,6 +22,7 @@ const appRoutes: Routes = [
   { path: 'Registrar', component: RegistrarComponent },
   { path: 'Principal', component: PrincipalComponent },
   { path: 'Reservar', component: ReservarComponent },
+  { path: 'Reservas', component: ReservasComponent },
   { path: '',   redirectTo: '/Login', pathMatch: 'full' },
   { path: '**', component: ErrorComponent },
   
@@ -35,7 +38,8 @@ const appRoutes: Routes = [
     RegistrarComponent,
     ErrorComponent,
     ReservarComponent,
-    ListadoInvitadosComponent
+    ListadoInvitadosComponent,
+    ReservasComponent
   ],
   imports: [
     BrowserModule,

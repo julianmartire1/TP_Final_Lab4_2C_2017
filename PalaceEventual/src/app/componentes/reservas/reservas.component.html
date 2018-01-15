@@ -1,0 +1,69 @@
+<br>
+<h1>Mis reservas</h1>
+<br>
+<div class="form-group">
+  <label for="exampleSelect1">Example select</label>
+  <select class="form-control" [(ngModel)]="buscar">
+    <option *ngFor="let item of fechas" [value]="item.idReserva">{{item.fecha}} | {{item.local}}</option>
+  </select>
+</div>
+
+<button type="button" class="btn btn-large btn-block btn-primary" (click)="listado()">Mostrar Listado</button>
+<br>
+<div *ngIf="bandera">
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Invitado</th>
+        <th scope="col">Mesa</th>
+        <th scope="col">Acción</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of reserva">
+        <td>{{item.nombre}}</td>
+        <td>{{item.mesa}}</td>
+        <td>
+          <button class="btn  btn-danger" (click)="eliminar(item.idInvitado)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <br>
+
+  <!-- AGREGAR INVITADO -->
+<button type="button" class="btn btn-large btn-block btn-success" data-toggle="modal" data-target="#exampleModal">
+    Agregar Invitado
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label>Invitado</label>
+                <input type="text" class="form-control" placeholder="Nombre completo" [(ngModel)]="invitado"><br>
+                <label>Mesa</label>
+                <select class="form-control" [(ngModel)]="mesa">
+                    <option>1</option>
+                    <option>2</option>
+                  </select><br>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="agregarInvitado()" [disabled]="invitado == '' || mesa == ''">Agregar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>

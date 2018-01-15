@@ -56,7 +56,28 @@ export class MihttpService {
     //let token=localStorage.getItem("token")
   }*/
 
-  registrar(data: Object, url: string)
+  registrar(data: Object, url: string){
+    return this.http.post(url, data)
+    .toPromise()
+    .then(this.extraerDatos)
+    .catch(this.handleError);
+  }
+
+  reservar(data: Object, url: string){
+    return this.http.post(url, data)
+    .toPromise()
+    .then(this.extraerDatos)
+    .catch(this.handleError);
+  }
+
+  eliminarInvitado(data: Object, url: string){
+    return this.http.post(url, data)
+    .toPromise()
+    .then(this.extraerDatos)
+    .catch(this.handleError);
+  }
+
+  reservasCliente(data: Object, url: string)
   {
     return this.http.post(url, data)
     .toPromise()
