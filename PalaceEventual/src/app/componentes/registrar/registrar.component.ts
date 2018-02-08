@@ -18,7 +18,8 @@ export class RegistrarComponent implements OnInit {
     let cliente : Cliente = new Cliente(this.usuario,this.clave);
     let obj = {
       usuario : cliente.usuario,
-      clave : cliente.clave
+      clave : cliente.clave,
+      tipo : "cliente"
     };
 
     this.servicio.registrar(obj,"http://localhost/servidor/BackEnd-PHP-jwt/api/registrar/")
@@ -29,7 +30,10 @@ export class RegistrarComponent implements OnInit {
       else 
       {
         if(data["bandera"] == false)
-          this.router.navigate(["/Login"]);
+          {
+            this.router.navigate(["/Login"]);
+            alert(data["error"]);
+          }
       }
     })
     .catch( err => {

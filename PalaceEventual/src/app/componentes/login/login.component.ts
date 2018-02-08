@@ -15,6 +15,26 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    let token=localStorage.getItem("token");
+    if(token != "" || token != null)
+    {
+      this.router.navigate(["/Principal"]);
+    }
+  }
+  encargado()
+  {
+    this.usuario="encargado";
+    this.clave="encargado"
+  }
+  empleado()
+  {
+    this.usuario="empleado";
+    this.clave="empleado"
+  }
+  cliente()
+  {
+    this.usuario="asd";
+    this.clave="123"
   }
 
   reservar()
@@ -42,6 +62,7 @@ export class LoginComponent implements OnInit {
       {
         localStorage.setItem("token",data["token"]);
         localStorage.setItem("usuario",data["datos"]["usuario"]);
+        localStorage.setItem("tipo",data["datos"]["tipo"]);
         this.router.navigate(["/Principal"]);
       }
       else

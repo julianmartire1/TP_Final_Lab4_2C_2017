@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MihttpService } from '../../services/mi-http.service';
+
 @Component({
-  selector: 'app-principal',
-  templateUrl: './principal.component.html',
-  styleUrls: ['./principal.component.css']
+  selector: 'app-menu',
+  templateUrl: './menu.component.html',
+  styleUrls: ['./menu.component.css']
 })
-export class PrincipalComponent implements OnInit {
-  usuario : string;
-  tipoDeUsuario : any;
-  constructor(public router : Router,public miHttp : MihttpService) { 
+export class MenuComponent implements OnInit {
+usuario;
+tipoDeUsuario;
+  constructor(public router : Router) { 
     this.usuario = localStorage.getItem("usuario");
     this.tipoDeUsuario = localStorage.getItem("tipo");
   }
@@ -31,8 +31,12 @@ export class PrincipalComponent implements OnInit {
     this.router.navigate(["/Reservas"]);
   }
 
+  home()
+  {
+    this.router.navigate(["/Principal"]);
+  }
+
   ngOnInit() {
-    
   }
 
 }

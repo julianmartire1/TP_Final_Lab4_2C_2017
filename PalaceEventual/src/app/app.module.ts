@@ -14,15 +14,17 @@ import { ErrorComponent } from './componentes/error/error.component';
 import { ListadoInvitadosComponent } from './componentes/listado-invitados/listado-invitados.component';
 import { ReservasComponent } from './componentes/reservas/reservas.component';
 import swal from 'sweetalert';
+import { MenuComponent } from './componentes/menu/menu.component';
+import { VerificarService } from './services/verificar.service';
 
 const appRoutes: Routes = [
   //{ path: 'pagina1' , component: Pagina1Component , canActivate: [VerificarJWTService] },
   //{ path: 'pagina2' , component: Pagina2Component , canActivate: [VerificarJwtAdminService] },
   { path: 'Login', component: LoginComponent },
   { path: 'Registrar', component: RegistrarComponent },
-  { path: 'Principal', component: PrincipalComponent },
-  { path: 'Reservar', component: ReservarComponent },
-  { path: 'Reservas', component: ReservasComponent },
+  { path: 'Principal', component: PrincipalComponent ,canActivate: [VerificarService]},
+  { path: 'Reservar', component: ReservarComponent,canActivate: [VerificarService] },
+  { path: 'Reservas', component: ReservasComponent,canActivate: [VerificarService] },
   { path: '',   redirectTo: '/Login', pathMatch: 'full' },
   { path: '**', component: ErrorComponent },
   
@@ -39,7 +41,8 @@ const appRoutes: Routes = [
     ErrorComponent,
     ReservarComponent,
     ListadoInvitadosComponent,
-    ReservasComponent
+    ReservasComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +50,7 @@ const appRoutes: Routes = [
     HttpModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [MihttpService],
+  providers: [MihttpService,VerificarService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

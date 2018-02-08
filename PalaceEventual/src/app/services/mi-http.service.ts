@@ -77,12 +77,35 @@ export class MihttpService {
     .catch(this.handleError);
   }
 
+  modificarInvitado(data: Object, url: string){
+    return this.http.post(url, data)
+    .toPromise()
+    .then(this.extraerDatos)
+    .catch(this.handleError);
+  }
+
   reservasCliente(data: Object, url: string)
   {
     return this.http.post(url, data)
     .toPromise()
     .then(this.extraerDatos)
     .catch(this.handleError);
+  }
+
+  traerTipoDeUsuario(data : Object, url: string)
+  {
+    return this.http.post(url, data)
+    .toPromise()
+    .then(this.extraerDatos)
+    .catch(this.handleError);
+  }
+
+  traerTodasLasReservas(url: string) {
+    return this.http
+      .get(url)
+      .toPromise()
+      .then(this.extraerDatos)
+      .catch(this.handleError);
   }
 
   private extraerDatos(resp: Response) {

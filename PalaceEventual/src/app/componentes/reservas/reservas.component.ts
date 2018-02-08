@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MihttpService } from '../../services/mi-http.service';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-reservas',
   templateUrl: './reservas.component.html',
@@ -12,11 +12,16 @@ export class ReservasComponent implements OnInit {
   fechas: any;
   array = ["1", "2", "3", "4", "5"];
   fechaHoy: any;
-  buscar;
+  buscar = "";
   bandera=false;
   invitado="";
   mesa="";
-  constructor(public mihttp: MihttpService) {
+  modalInvitado = {};
+  invitadoModificado ="";
+  mesaModificado="";
+  tipo;
+  constructor(public mihttp: MihttpService,public miRouter : Router) {
+    this.tipo = localStorage.getItem("tipo");
   }
 
   agregarInvitado()
@@ -50,33 +55,112 @@ export class ReservasComponent implements OnInit {
 
   listado() {
     this.bandera=false;
-    let cliente = localStorage.getItem("usuario");
+    let tipo = localStorage.getItem("tipo");
+    if(tipo == "encargado" || tipo == "empleado")
+    {
+      let cliente = localStorage.getItem("usuario");
+      let obj = {
+        fecha: this.buscar
+      };
+      //console.log(obj);
+      this.mihttp.reservasCliente(obj, "http://localhost/servidor/BackEnd-PHP-jwt/api/reservaEncargado/")
+      .then(data => {
+        //console.log(data);
+        this.reserva = data["Reserva"];
+        this.bandera=true;
+      })
+      .catch(err => console.log(err));
+    }
+    if(tipo == "cliente")
+    {
+      let cliente = localStorage.getItem("usuario");
+      let obj = {
+        fecha: this.buscar,
+        cliente: cliente
+      };
+      //console.log(obj);
+      this.mihttp.reservasCliente(obj, "http://localhost/servidor/BackEnd-PHP-jwt/api/reservaCliente/")
+      .then(data => {
+        //console.log(data);
+        this.reserva = data["Reserva"];
+        this.bandera=true;
+      })
+      .catch(err => console.log(err));
+    }
+    
+  }
+
+  modal(obj : any)
+  {
+    this.modalInvitado=obj;
+  }
+
+  modificarInvitado(id)
+  {
     let obj = {
-      fecha: this.buscar,
-      cliente: cliente
+      id: id,
+      invitado: this.invitadoModificado,
+      mesa: this.mesaModificado
     };
-    console.log(obj);
-    this.mihttp.reservasCliente(obj, "http://localhost/servidor/BackEnd-PHP-jwt/api/reservaCliente/")
+
+    this.mihttp.modificarInvitado(obj, "http://localhost/servidor/BackEnd-PHP-jwt/api/modificarInvitado/")
     .then(data => {
       console.log(data);
-      this.reserva = data["Reserva"];
-      this.bandera=true;
+      this.listado();
     })
     .catch(err => console.log(err));
+
+  }
+
+  cancelarReserva()
+  {
+    let obj = {
+      idReserva : this.buscar
+    };
+    //console.log(obj);
+    //return;
+    this.mihttp.httpDeletePromise("http://localhost/servidor/BackEnd-PHP-jwt/api/eliminarReserva/",obj)
+    .then(res => {
+      let respuesta = res["Eliminada"];
+      if(respuesta == "true")
+      {
+        alert("Reserva eliminada");
+        this.miRouter.navigate(["/Principal"]);
+      }        
+      else 
+        alert("No se pudo eliminar la reserva");
+    })
+    .catch(err => {
+      console.log(err);
+    });
   }
 
   ngOnInit() {
 
-    let cliente = localStorage.getItem("usuario");
-    let obj = {
-      cliente: cliente
-    };
-    this.mihttp.reservasCliente(obj, "http://localhost/servidor/BackEnd-PHP-jwt/api/fechaReservaCliente/")
-      .then(data => {
-        console.log(data);
-        this.fechas = data["FECHA"];
-      })
-      .catch(err => console.log(err));
+    let tipo = localStorage.getItem("tipo");
+    if(tipo == "encargado" || tipo == "empleado")
+    {
+      this.mihttp.traerTodasLasReservas("http://localhost/servidor/BackEnd-PHP-jwt/api/traerTodasLasReservas/")
+        .then(data => {
+          console.log(data);
+          this.fechas = data["FECHA"];
+        })
+        .catch(err => console.log(err));
+    }
+    if(tipo == "cliente")
+    {
+      let cliente = localStorage.getItem("usuario");
+      let obj = {
+        cliente: cliente
+      };
+      this.mihttp.reservasCliente(obj, "http://localhost/servidor/BackEnd-PHP-jwt/api/fechaReservaCliente/")
+        .then(data => {
+          console.log(data);
+          this.fechas = data["FECHA"];
+        })
+        .catch(err => console.log(err));
+    }
+    
 
   }
 

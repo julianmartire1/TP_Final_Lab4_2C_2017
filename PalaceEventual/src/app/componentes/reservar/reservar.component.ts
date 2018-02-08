@@ -1,5 +1,6 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { MihttpService } from '../../services/mi-http.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-reservar',
@@ -16,7 +17,7 @@ export class ReservarComponent implements OnInit {
   invitado;
   bandera=false;
   fecha : string = "";
-  constructor(public mihttp : MihttpService) {
+  constructor(public mihttp : MihttpService,public miRouter : Router) {
     this.arrayMesa1 = new Array<any>();
     this.arrayMesa2 = new Array<any>();
   }
@@ -64,10 +65,18 @@ export class ReservarComponent implements OnInit {
     this.reserva.fecha = this.fecha;
     if(this.bandera==false)
       this.reserva.con = false;
+
+    if(this.reserva.mesas == null)
+    {
+      this.reserva.mesas=null;
+    }
+
     let obj = { "reserva": this.reserva };
     this.mihttp.reservar(obj,"http://localhost/servidor/BackEnd-PHP-jwt/api/reservar/")
     .then(res => {
       console.log("DESDE API",res);
+      alert(res["RESULTADO"]);
+      this.miRouter.navigate(["/Principal"]);
     })
     .catch(err => console.log(err));
   }
