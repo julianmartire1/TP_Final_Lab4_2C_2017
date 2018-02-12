@@ -7,7 +7,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './componentes/login/login.component';
 import { PrincipalComponent } from './componentes/principal/principal.component';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes , Router, ActivatedRoute } from '@angular/router';
 import { MihttpService } from './services/mi-http.service';
 import { RegistrarComponent } from './componentes/registrar/registrar.component';
 import { ErrorComponent } from './componentes/error/error.component';
@@ -16,6 +16,11 @@ import { ReservasComponent } from './componentes/reservas/reservas.component';
 import swal from 'sweetalert';
 import { MenuComponent } from './componentes/menu/menu.component';
 import { VerificarService } from './services/verificar.service';
+import { MapaComponent } from './componentes/mapa/mapa.component';
+
+import { NguiMapModule} from '@ngui/map';
+import { Location, LocationStrategy } from '@angular/common';
+import { SpinnerComponent } from './componentes/spinner/spinner.component';
 
 const appRoutes: Routes = [
   //{ path: 'pagina1' , component: Pagina1Component , canActivate: [VerificarJWTService] },
@@ -42,15 +47,18 @@ const appRoutes: Routes = [
     ReservarComponent,
     ListadoInvitadosComponent,
     ReservasComponent,
-    MenuComponent
+    MenuComponent,
+    MapaComponent,
+    SpinnerComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
+    NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyBUHx4bqg1yVT_KgjnLbeqlD40DUGSw57Q'}),
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [MihttpService,VerificarService],
+  providers: [MihttpService,VerificarService,Location],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

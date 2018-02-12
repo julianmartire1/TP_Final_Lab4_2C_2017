@@ -12,83 +12,90 @@
 </div>
 
 -->
-<app-menu></app-menu>
-<br>
-<div class="container">
-<ul class="list-group">
-    <div *ngIf="tipoDeUsuario == 'cliente'">
-        <li class="list-group-item" style="" (click)="misReservas()">
-            <!--<a routerLink="/Juegos">-->
-            <a>
-                <div class="media">
-                    <div class="media-left">
-                        <img src="../../../assets/img/reservas.jpg" class="media-object imagenDeMenu">
-                    </div>
-                    <div class="media-body">
-                        <h4 class="media-heading">Mis reservas</h4>
-                        <p>En esta seccion veras todas tus reservas con los listados de los invitados con sus respectivas mesas.</p>
-                    </div>
+<div *ngIf="spinner">
+    <app-menu></app-menu>
+    <br>
 
-                </div>
-            </a>
-        </li>
-        <li class="list-group-item" style="" (click)="reservar()">
-            <!--<a routerLink="/Juegos">-->
-            <a>
-                <div class="media">
-                    <div class="media-left">
-                        <img src="../../../assets/img/lista.jpg" class="media-object imagenDeMenu">
-                    </div>
-                    <div class="media-body">
-                        <h4 class="media-heading">Reservar local</h4>
-                        <p>En esta seccion veras todas las reservas de los clientes con los listados de los invitados y con
-                            sus respectivas mesas.Podras cancelar la reserva, agregar invitados, eliminarlos y editarlos.
-                        </p>
-                    </div>
+    <div class="container">
 
-                </div>
-            </a>
-        </li>
+        <ul class="list-group">
+            <div *ngIf="tipoDeUsuario == 'cliente'">
+                <li class="list-group-item" style="" (click)="misReservas()">
+                    <a>
+                        <div class="media">
+                            <div class="media-left">
+                                <img src="../../../assets/img/reservas.jpg" class="media-object imagenDeMenu">
+                            </div>
+                            <div class="media-body">
+                                <h4 class="media-heading">Mis reservas</h4>
+                                <p>En esta seccion veras todas tus reservas con los listados de los invitados con sus respectivas
+                                    mesas.
+                                </p>
+                            </div>
+
+                        </div>
+                    </a>
+                </li>
+                <li class="list-group-item" style="" (click)="reservar()">
+                    <a>
+                        <div class="media">
+                            <div class="media-left">
+                                <img src="../../../assets/img/lista.jpg" class="media-object imagenDeMenu">
+                            </div>
+                            <div class="media-body">
+                                <h4 class="media-heading">Reservar local</h4>
+                                <p>En esta seccion veras todas las reservas de los clientes con los listados de los invitados
+                                    y con sus respectivas mesas.Podras cancelar la reserva, agregar invitados, eliminarlos
+                                    y editarlos.
+                                </p>
+                            </div>
+
+                        </div>
+                    </a>
+                </li>
+            </div>
+            <div *ngIf="tipoDeUsuario == 'encargado'">
+                <li class="list-group-item" style="" (click)="misReservas()">
+                    <a>
+                        <div class="media">
+                            <div class="media-left">
+                                <img src="../../../assets/img/lista.jpg" class="media-object imagenDeMenu">
+                            </div>
+                            <div class="media-body">
+                                <h4 class="media-heading">Mis reservas</h4>
+                                <p>En esta seccion veras todas las reservas de los clientes con los listados de los invitados
+                                    y con sus respectivas mesas.Podras cancelar la reserva, agregar invitados, eliminarlos
+                                    y editarlos.
+                                </p>
+                            </div>
+
+                        </div>
+                    </a>
+                </li>
+            </div>
+            <div *ngIf="tipoDeUsuario == 'empleado'">
+                <li class="list-group-item" style="" (click)="misReservas()">
+                    <a>
+                        <div class="media">
+                            <div class="media-left">
+                                <img src="../../../assets/img/lista.jpg" class="media-object imagenDeMenu">
+                            </div>
+                            <div class="media-body">
+                                <h4 class="media-heading">Mis reservas</h4>
+                                <p>En esta seccion veras todas las reservas de los clientes con los listados de los invitados
+                                    y con sus respectivas mesas.</p>
+                            </div>
+
+                        </div>
+                    </a>
+                </li>
+            </div>
+
+        </ul>
+        <br>
+        <br>
+        <app-mapa></app-mapa>
     </div>
-    <div *ngIf="tipoDeUsuario == 'encargado'">
-        <li class="list-group-item" style="" (click)="misReservas()">
-            <!--<a routerLink="/Juegos">-->
-            <a>
-                <div class="media">
-                    <div class="media-left">
-                        <img src="../../../assets/img/lista.jpg" class="media-object imagenDeMenu">
-                    </div>
-                    <div class="media-body">
-                        <h4 class="media-heading">Mis reservas</h4>
-                        <p>En esta seccion veras todas las reservas de los clientes con los listados de los invitados y con
-                            sus respectivas mesas.Podras cancelar la reserva, agregar invitados, eliminarlos y editarlos.
-                        </p>
-                    </div>
-
-                </div>
-            </a>
-        </li>
-    </div>
-    <div *ngIf="tipoDeUsuario == 'empleado'">
-        <li class="list-group-item" style="" (click)="misReservas()">
-            <!--<a routerLink="/Juegos">-->
-            <a>
-                <div class="media">
-                    <div class="media-left">
-                        <img src="../../../assets/img/lista.jpg" class="media-object imagenDeMenu">
-                    </div>
-                    <div class="media-body">
-                        <h4 class="media-heading">Mis reservas</h4>
-                        <p>En esta seccion veras todas las reservas de los clientes con los listados de los invitados y con
-                            sus respectivas mesas.</p>
-                    </div>
-
-                </div>
-            </a>
-        </li>
-    </div>
-
-</ul>
-<br>
-
 </div>
+
+<app-spinner style="position: absolute;width: 300px;height: 200px;z-index: 15;top: 50%;left: 50%;margin: -100px 0 0 -150px;" *ngIf="!spinner"></app-spinner>

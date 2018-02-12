@@ -1,0 +1,50 @@
+<div class="container-map">
+  <h1 class="text-primary text-center" style="background-color:aqua;padding:5px;border-radius:5px">¿Cómo llego?</h1>
+  <div class="nada">
+    <div class="form-group">
+      <label for="localOrigen">Origen</label>
+      <select [(ngModel)]="desde" class="form-control form-control-sm">
+        <option selected value="" disabled>Origen...</option>
+        <option value="{{direction.origin}}">Mi ubicacion</option>
+        <option value="-34.720657,-58.254600">Quilmes</option>
+        <option value="-34.693013,-58.331757">Avellaneda</option>
+        <option value="-34.759160, -58.205168">Berazategui</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="localDestino">Local destino</label>
+      <select [(ngModel)]="hasta" class="form-control form-control-sm">
+        <option selected value="" disabled>Destino...</option>
+        <option value="-34.720657,-58.254600">Quilmes</option>
+        <option value="-34.693013,-58.331757">Avellaneda</option>
+        <option value="-34.759160, -58.205168">Berazategui</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="localDestino">Modo de viaje</label>
+      <select [(ngModel)]="viaje" class="form-control form-control-sm">
+        <option value="WALKING">Caminando (Por defecto)</option>
+        <option value="DRIVING">En auto</option>
+        <option value="BICYCLING">En bicileta</option>
+        <option value="TRANSIT">Transporte Publico</option>
+      </select>
+    </div>
+    <button class="btn btn-large btn-block btn-primary" (click)="mapear()" [disabled]="hasta == '' || desde == ''">Mapear</button>
+    <br>
+  </div>
+
+  <div *ngIf="mensajeError">
+    <br>
+    <br>
+    <br>
+    <div class="alert alert-danger">
+      {{mensajeError}}
+    </div>
+  </div>
+
+  <ngui-map zoom="13" center="">
+    <directions-renderer [suppressMarkers]="true" [draggable]="true" panel="#my-panel" (directions_changed)="directionsChanged()"
+      [directions-request]="direction">
+    </directions-renderer>
+  </ngui-map>
+</div>

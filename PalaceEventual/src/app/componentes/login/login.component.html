@@ -18,52 +18,54 @@
 -->
 <!--<a routerLink="/login" class="forgot-pass">Olvido el password?</a>-->
 
+<div *ngIf="spinner">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-12 mx-auto">
+                        <span class="anchor" id="formLogin"></span>
 
-<div class="container py-5">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="row">
-                <div class="col-md-12 mx-auto">
-                    <span class="anchor" id="formLogin"></span>
-
-                    <!-- form card login -->
-                    <div class="card rounded-0">
-                        <div class="card-header">
-                            <h2 class="mb-0" style="text-align:center">Iniciar sesión</h2>
-                        </div>
-                        <div class="card-body">
-
-                            <div class="form-group">
-                                <label for="uname1">Usuario</label>
-                                <input type="text" [(ngModel)]="usuario" class="form-control" placeholder="Usuario">
+                        <!-- form card login -->
+                        <div class="card rounded-0">
+                            <div class="card-header">
+                                <h2 class="mb-0" style="text-align:center">Iniciar sesión</h2>
                             </div>
-                            <div class="form-group">
-                                <label>Contraseña</label>
-                                <input type="password" [(ngModel)]="clave" class="form-control" placeholder="Contraseña">
-                            </div>
-                            <div class="form-group">
-                                <div class="btn-group" role="group" aria-label="Basic example" style="width:101%;text-align:center">
-                                    <button type="button" class="btn btn-secondary" (click)="encargado()" style="width:33%">Encargado</button>
-                                    <button type="button" class="btn btn-secondary" (click)="empleado()" style="width:33%">Empleado</button>
-                                    <button type="button" class="btn btn-secondary" (click)="cliente()" style="width:33%">Cliente</button>
+                            <div class="card-body">
+
+                                <div class="form-group">
+                                    <label for="uname1">Usuario</label>
+                                    <input type="text" [(ngModel)]="usuario" class="form-control" placeholder="Usuario">
                                 </div>
-                            </div>
-                            <button type="button" class="btn btn-warning btn-lg float-left" style="width:50%" (click)="registrar()">Registrarse</button>
-                            <button type="button" class="btn btn-success btn-lg float-right" style="width:50%" (click)="ingresar()" [disabled]="usuario == null || usuario =='' || clave == null || clave ==''">Iniciar Sesión</button>
+                                <div class="form-group">
+                                    <label>Contraseña</label>
+                                    <input type="password" [(ngModel)]="clave" class="form-control" placeholder="Contraseña">
+                                </div>
+                                <div class="form-group">
+                                    <div class="btn-group" role="group" aria-label="Basic example" style="width:101%;text-align:center">
+                                        <button type="button" class="btn btn-secondary" (click)="encargado()" style="width:33%">Encargado</button>
+                                        <button type="button" class="btn btn-secondary" (click)="empleado()" style="width:33%">Empleado</button>
+                                        <button type="button" class="btn btn-secondary" (click)="cliente()" style="width:33%">Cliente</button>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-warning btn-lg float-left" style="width:50%" (click)="registrar()">Registrarse</button>
+                                <button type="button" class="btn btn-success btn-lg float-right" style="width:50%" (click)="ingresar()" [disabled]="usuario == null || usuario =='' || clave == null || clave ==''">Iniciar Sesión</button>
 
+                            </div>
+                            <!--/card-block-->
                         </div>
-                        <!--/card-block-->
+                        <!-- /form card login -->
+
                     </div>
-                    <!-- /form card login -->
+
 
                 </div>
-
+                <!--/row-->
 
             </div>
-            <!--/row-->
-
+            <!--/col-->
         </div>
-        <!--/col-->
+        <!--/row-->
     </div>
-    <!--/row-->
 </div>
+<app-spinner style="position: absolute;width: 300px;height: 200px;z-index: 15;top: 50%;left: 50%;margin: -100px 0 0 -150px;" *ngIf="!spinner"></app-spinner>

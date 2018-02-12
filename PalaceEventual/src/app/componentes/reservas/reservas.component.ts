@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { MihttpService } from '../../services/mi-http.service';
 import { Router } from '@angular/router';
+import { Angular2Csv } from 'angular2-csv/Angular2-csv';
+declare var jsPDF: any;
+//declare var $: any;
+import * as $ from 'jquery';
+import * as autoTable from 'jspdf-autotable';
+
 @Component({
   selector: 'app-reservas',
   templateUrl: './reservas.component.html',
@@ -8,6 +14,7 @@ import { Router } from '@angular/router';
 })
 export class ReservasComponent implements OnInit {
   reserva: any;
+  spinner = false;
   local: any;
   fechas: any;
   array = ["1", "2", "3", "4", "5"];
@@ -54,6 +61,7 @@ export class ReservasComponent implements OnInit {
   }
 
   listado() {
+    this.spinner=false;
     this.bandera=false;
     let tipo = localStorage.getItem("tipo");
     if(tipo == "encargado" || tipo == "empleado")
@@ -68,8 +76,12 @@ export class ReservasComponent implements OnInit {
         //console.log(data);
         this.reserva = data["Reserva"];
         this.bandera=true;
+        this.spinner=true;
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err)
+        this.spinner=true;
+      });
     }
     if(tipo == "cliente")
     {
@@ -83,9 +95,14 @@ export class ReservasComponent implements OnInit {
       .then(data => {
         //console.log(data);
         this.reserva = data["Reserva"];
+        console.log(this.reserva);
         this.bandera=true;
+        this.spinner=true;
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err)
+        this.spinner=true;
+      });
     }
     
   }
@@ -144,8 +161,12 @@ export class ReservasComponent implements OnInit {
         .then(data => {
           console.log(data);
           this.fechas = data["FECHA"];
+          this.spinner=true;
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+          console.log(err)
+          this.spinner=true;
+        });
     }
     if(tipo == "cliente")
     {
@@ -157,11 +178,55 @@ export class ReservasComponent implements OnInit {
         .then(data => {
           console.log(data);
           this.fechas = data["FECHA"];
+          this.spinner=true;
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+          console.log(err)
+          this.spinner=true;
+        });
     }
     
 
+
+  }
+
+  downloadPdf() {
+    var columns = [
+      {title: "ID", dataKey: "idInvitado"},
+      {title: "NOMBRE", dataKey: "nombre"},
+      {title: "MESA", dataKey: "mesa"}
+    ];    
+    // Only pt supported (not mm or in)
+    
+    var doc = new jsPDF('p', 'pt');
+    doc.autoTable(columns, this.reserva, {
+      styles: {
+        overflow: 'linebreak',
+        fontSize: 12,
+        valign: 'middle'
+    },
+      columnStyles: {
+        id: {fillColor: [203, 208, 0]}
+      },
+      margin: {top: 60},
+      addPageContent: function(data) {
+        doc.text("Lista de Invitados", 250, 30);
+      }
+    });
+    doc.save('listaDeInvitados.pdf');
+  }
+
+  generarCsv(){
+
+    let data : any = [];
+    console.log(data);
+    for (let i = 0; i < this.reserva.length; i++) {
+      let obj = {"id" : this.reserva[i].idInvitado, "nobmre" : this.reserva[i].nombre, "mesa" : this.reserva[i].mesa};
+      data[i]=obj;
+    }
+    console.log(data);
+
+    new Angular2Csv(data, 'lista de invitados');
   }
 
 }

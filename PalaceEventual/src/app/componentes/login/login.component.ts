@@ -11,10 +11,12 @@ import { Cliente } from '../../clases/cliente';
 export class LoginComponent implements OnInit {
   usuario : string;
   clave : string;
+  spinner = false;
   constructor(public servicio : MihttpService,public router : Router) { 
   }
 
   ngOnInit() {
+    this.spinner=true;
     let token=localStorage.getItem("token");
     if(token != "" || token != null)
     {
@@ -49,6 +51,7 @@ export class LoginComponent implements OnInit {
 
   ingresar()
   {
+    this.spinner=false;
     let cliente : Cliente = new Cliente(this.usuario,this.clave);
     let obj = {
       usuario : cliente.usuario,
@@ -57,6 +60,7 @@ export class LoginComponent implements OnInit {
 
     this.servicio.post(obj,"http://localhost/servidor/BackEnd-PHP-jwt/api/ingreso/")
     .then( data => {
+      this.spinner=true;
       console.log(data);
       if(data["bandera"] == true)
       {
@@ -69,6 +73,7 @@ export class LoginComponent implements OnInit {
         alert(data["error"]);
     })
     .catch( err => {
+      this.spinner=true;
       console.log(err);
     });
   }

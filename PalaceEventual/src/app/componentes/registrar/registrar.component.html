@@ -8,20 +8,21 @@
 <button class="btn btn-success btn-block" (click)="registrar()" [disabled]="usuario == '' || clave == '' || clave2 == '' || clave != clave2 ">Registrar</button>
 
 -->
-<div class="container py-5">
+<div *ngIf="spinner">
+    <div class="container py-5">
         <div class="row">
             <div class="col-md-12">
                 <div class="row">
                     <div class="col-md-12 mx-auto">
                         <span class="anchor" id="formLogin"></span>
-    
+
                         <!-- form card login -->
                         <div class="card rounded-0">
                             <div class="card-header">
                                 <h2 class="mb-0" style="text-align:center">Registrarse</h2>
                             </div>
                             <div class="card-body">
-    
+
                                 <div class="form-group">
                                     <label for="uname1">Usuario</label>
                                     <input type="text" [(ngModel)]="usuario" class="form-control" placeholder="Usuario">
@@ -35,20 +36,24 @@
                                     <input type="password" [(ngModel)]="clave2" class="form-control" placeholder="Repetir Contraseña">
                                 </div>
                                 <button class="btn btn-success btn-block" (click)="registrar()" [disabled]="usuario == '' || clave == '' || clave2 == '' || clave != clave2 ">Registrar</button>
-    
+
                             </div>
                             <!--/card-block-->
                         </div>
                         <!-- /form card login -->
-    
+
                     </div>
-    
-    
+
+
                 </div>
                 <!--/row-->
-    
+
             </div>
             <!--/col-->
         </div>
         <!--/row-->
     </div>
+
+</div>
+
+<app-spinner style="position: absolute;width: 300px;height: 200px;z-index: 15;top: 50%;left: 50%;margin: -100px 0 0 -150px;" *ngIf="!spinner"></app-spinner>

@@ -17,6 +17,7 @@ export class ReservarComponent implements OnInit {
   invitado;
   bandera=false;
   fecha : string = "";
+  listado=false;
   constructor(public mihttp : MihttpService,public miRouter : Router) {
     this.arrayMesa1 = new Array<any>();
     this.arrayMesa2 = new Array<any>();
@@ -39,7 +40,7 @@ export class ReservarComponent implements OnInit {
 
     this.invitado = '';
     this.mesa = '';
-
+    this.listado=true;
     //console.log("MESA 1", this.arrayMesa1);
     //console.log("MESA 2", this.arrayMesa2);
   }

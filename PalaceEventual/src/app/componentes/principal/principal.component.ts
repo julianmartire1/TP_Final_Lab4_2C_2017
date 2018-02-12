@@ -9,6 +9,7 @@ import { MihttpService } from '../../services/mi-http.service';
 export class PrincipalComponent implements OnInit {
   usuario : string;
   tipoDeUsuario : any;
+  spinner = false;
   constructor(public router : Router,public miHttp : MihttpService) { 
     this.usuario = localStorage.getItem("usuario");
     this.tipoDeUsuario = localStorage.getItem("tipo");
@@ -32,6 +33,9 @@ export class PrincipalComponent implements OnInit {
   }
 
   ngOnInit() {
+    setTimeout(() => {
+      this.spinner=true;
+    }, 1000);
     
   }
 
