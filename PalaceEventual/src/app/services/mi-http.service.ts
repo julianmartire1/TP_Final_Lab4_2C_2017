@@ -108,6 +108,21 @@ export class MihttpService {
       .catch(this.handleError);
   }
 
+  leerEncuestas(url: string) {
+    return this.http
+      .get(url)
+      .toPromise()
+      .then(this.extraerDatos)
+      .catch(this.handleError);
+  }
+
+  enviarEncuesta(data: Object, url: string){
+    return this.http.post(url, data)
+    .toPromise()
+    .then(this.extraerDatos)
+    .catch(this.handleError);
+  }
+
   private extraerDatos(resp: Response) {
     return resp.json() || {};
   }

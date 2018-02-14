@@ -1,0 +1,81 @@
+<div *ngIf="spinner">
+  <app-menu></app-menu>
+  <br>
+  <div class="container">
+    <div *ngIf="perfil == 'cliente' ">
+      <div class="container-encuestas">
+        <h1>Evaluación del evento</h1>
+        Hola, Por favor, invierta unos pocos minutos de su tiempo para rellenar la siguiente encuesta.
+        <br>
+        <br>
+        <div class="container-pregunta">
+          <h2>¿Cómo evaluarías el evento?</h2>
+          <div class="form-group">
+            <select class="form-control form-control-sm" [(ngModel)]="evento">
+              <option>Bueno</option>
+              <option>Medio</option>
+              <option>Malo</option>
+            </select>
+          </div>
+        </div>
+        <br>
+        <div class="container-pregunta">
+          <h2>Por favor, evalúa los siguientes aspectos del evento:</h2>
+          <div class="form-group">
+            <label>Estacionamiento</label>
+            <select class="form-control form-control-sm" [(ngModel)]="estacionamiento">
+              <option>Bueno</option>
+              <option>Medio</option>
+              <option>Malo</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Programa y Planeamiento</label>
+            <select class="form-control form-control-sm" [(ngModel)]="programa">
+              <option>Bueno</option>
+              <option>Medio</option>
+              <option>Malo</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Diversion</label>
+            <select class="form-control form-control-sm" [(ngModel)]="diversion">
+              <option>Bueno</option>
+              <option>Medio</option>
+              <option>Malo</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Comida y bebida</label>
+            <select class="form-control form-control-sm" [(ngModel)]="alimentos">
+              <option>Bueno</option>
+              <option>Medio</option>
+              <option>Malo</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <br>
+      <br>
+      <button class="btn btn-large btn-block btn-warning" (click)="enviarEncuesta()" [disabled]="evento == '' || estacionamiento == '' || programa == '' || diversion == '' || alimentos == '' ">Enviar Encuesta</button>
+    </div>
+    <div *ngIf="perfil == 'encargado' ">
+      
+        <div *ngIf="mostrarGraficos" style="background-color:white;border-radius:5px;">
+            <h1 style="text-align:center">ESTADISTICAS</h1>
+            <div style="display: block">
+              <canvas baseChart
+              [datasets]="barChartData"
+              [labels]="barChartLabels"
+              [options]="barChartOptions"
+              [legend]="barChartLegend"
+              [chartType]="barChartType">
+              </canvas>
+            </div>
+          </div>
+        
+    </div>
+  </div>
+</div>
+<app-spinner style="position: absolute;width: 300px;height: 200px;z-index: 15;top: 50%;left: 50%;margin: -100px 0 0 -150px;"
+  *ngIf="!spinner"></app-spinner>

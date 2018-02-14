@@ -53,6 +53,21 @@
                         </div>
                     </a>
                 </li>
+                <li class="list-group-item" style="" (click)="encuestas()">
+                    <a>
+                        <div class="media">
+                            <div class="media-left">
+                                <img src="../../../assets/img/encuesta.png" class="media-object imagenDeMenu">
+                            </div>
+                            <div class="media-body">
+                                <h4 class="media-heading">Completa nuestra encuesta</h4>
+                                <p>En esta sección podras completar nuestra encuesta para evaluar nuestros locales y el servicio dado.
+                                </p>
+                            </div>
+
+                        </div>
+                    </a>
+                </li>
             </div>
             <div *ngIf="tipoDeUsuario == 'encargado'">
                 <li class="list-group-item" style="" (click)="misReservas()">
@@ -62,7 +77,7 @@
                                 <img src="../../../assets/img/lista.jpg" class="media-object imagenDeMenu">
                             </div>
                             <div class="media-body">
-                                <h4 class="media-heading">Mis reservas</h4>
+                                <h4 class="media-heading">Reservas</h4>
                                 <p>En esta seccion veras todas las reservas de los clientes con los listados de los invitados
                                     y con sus respectivas mesas.Podras cancelar la reserva, agregar invitados, eliminarlos
                                     y editarlos.
@@ -72,6 +87,21 @@
                         </div>
                     </a>
                 </li>
+                <li class="list-group-item" style="" (click)="encuestas()">
+                        <a>
+                            <div class="media">
+                                <div class="media-left">
+                                    <img src="../../../assets/img/encuesta.png" class="media-object imagenDeMenu">
+                                </div>
+                                <div class="media-body">
+                                    <h4 class="media-heading">Ver Estadisticas</h4>
+                                    <p>En esta sección podras ver los resultados de las encuestas hechas por los clientes.
+                                    </p>
+                                </div>
+    
+                            </div>
+                        </a>
+                    </li>
             </div>
             <div *ngIf="tipoDeUsuario == 'empleado'">
                 <li class="list-group-item" style="" (click)="misReservas()">
@@ -81,7 +111,7 @@
                                 <img src="../../../assets/img/lista.jpg" class="media-object imagenDeMenu">
                             </div>
                             <div class="media-body">
-                                <h4 class="media-heading">Mis reservas</h4>
+                                <h4 class="media-heading">Reservas</h4>
                                 <p>En esta seccion veras todas las reservas de los clientes con los listados de los invitados
                                     y con sus respectivas mesas.</p>
                             </div>
@@ -98,4 +128,5 @@
     </div>
 </div>
 
-<app-spinner style="position: absolute;width: 300px;height: 200px;z-index: 15;top: 50%;left: 50%;margin: -100px 0 0 -150px;" *ngIf="!spinner"></app-spinner>
+<app-spinner style="position: absolute;width: 300px;height: 200px;z-index: 15;top: 50%;left: 50%;margin: -100px 0 0 -150px;"
+    *ngIf="!spinner"></app-spinner>

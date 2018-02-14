@@ -32,6 +32,10 @@ export class MapaComponent implements OnInit {
       this.direction.origin = position.coords.latitude + ',' + position.coords.longitude;
       console.log(this.direction.origin);
     });
+
+    this.directionsRendererDirective['initialized$'].subscribe(directionsRenderer => {
+      this.directionsRenderer = directionsRenderer;
+    });
   }
 
   mapear() {
@@ -43,6 +47,7 @@ export class MapaComponent implements OnInit {
 
   directionsChanged() {
     this.directionsResult = this.directionsRenderer.getDirections();
+    console.log(this.directionsResult);
     this.cdr.detectChanges();
   }
 

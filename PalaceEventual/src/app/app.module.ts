@@ -21,6 +21,8 @@ import { MapaComponent } from './componentes/mapa/mapa.component';
 import { NguiMapModule} from '@ngui/map';
 import { Location, LocationStrategy } from '@angular/common';
 import { SpinnerComponent } from './componentes/spinner/spinner.component';
+import { EncuestasComponent } from './componentes/encuestas/encuestas.component';
+import { ChartsModule } from 'ng2-charts';
 
 const appRoutes: Routes = [
   //{ path: 'pagina1' , component: Pagina1Component , canActivate: [VerificarJWTService] },
@@ -30,6 +32,7 @@ const appRoutes: Routes = [
   { path: 'Principal', component: PrincipalComponent ,canActivate: [VerificarService]},
   { path: 'Reservar', component: ReservarComponent,canActivate: [VerificarService] },
   { path: 'Reservas', component: ReservasComponent,canActivate: [VerificarService] },
+  { path: 'Encuestas', component: EncuestasComponent,canActivate: [VerificarService] },
   { path: '',   redirectTo: '/Login', pathMatch: 'full' },
   { path: '**', component: ErrorComponent },
   
@@ -49,12 +52,14 @@ const appRoutes: Routes = [
     ReservasComponent,
     MenuComponent,
     MapaComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    EncuestasComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
+    ChartsModule,
     NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyBUHx4bqg1yVT_KgjnLbeqlD40DUGSw57Q'}),
     RouterModule.forRoot(appRoutes)
   ],

@@ -27,6 +27,11 @@ export class PrincipalComponent implements OnInit {
     this.router.navigate(["/Reservar"]);
   }
 
+  encuestas()
+  {
+    this.router.navigate(["/Encuestas"]);
+  }
+
   misReservas()
   {
     this.router.navigate(["/Reservas"]);
