@@ -12,6 +12,8 @@ export class LoginComponent implements OnInit {
   usuario : string;
   clave : string;
   spinner = false;
+  numeroF: number=0;
+  local="";
   constructor(public servicio : MihttpService,public router : Router) { 
   }
 
@@ -48,6 +50,33 @@ export class LoginComponent implements OnInit {
   {
     this.router.navigate(["/Registrar"]);
   }
+
+  invitado()
+  {
+    this.router.navigate(["/Invitado"]);
+  }
+
+  numeroFiesta()
+  {
+    let obj={
+      numero : this.numeroF
+    };
+    this.servicio.post(obj,"http://localhost/servidor/BackEnd-PHP-jwt/api/numeroFiesta/")
+    .then( data => {
+      this.spinner=true;
+      if(data["Local"].length > 0 )
+      {
+        this.local=data["Local"][0]["local"];
+      }
+      else alert("Numero invalido");
+    })
+    .catch( err => {
+      this.spinner=true;
+      console.log(err);
+    });
+  }
+
+
 
   ingresar()
   {

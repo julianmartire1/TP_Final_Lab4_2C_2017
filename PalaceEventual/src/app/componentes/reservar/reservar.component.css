@@ -1,0 +1,43 @@
+@media (min-width:1200px) {
+    .g-recaptcha {
+        display: inline-block;
+    	margin-left: 37%;
+    }
+}
+
+@media (min-width: 992px)and (max-width:1199px){
+    .g-recaptcha {
+        display: inline-block;
+    	margin-left: 33%;
+    }
+}
+
+@media (min-width: 769px) and (max-width:991px){
+    .g-recaptcha {
+        display: inline-block;
+    	margin-left: 28%;
+    }
+}
+
+@media (min-width: 575px)  and (max-width:768px){
+    .g-recaptcha {
+        display: inline-block;
+    	margin-left: 20%;
+    }
+}
+
+@media (min-width: 524px)  and (max-width:574px){
+    .g-recaptcha {
+        display: inline-block;
+    	margin-left: 15%;
+    }
+}
+
+@media (min-width: 400px)  and (max-width:523px){
+    .g-recaptcha {
+        display: inline-block;
+    	margin-left: 15%;
+    }
+}
+
+

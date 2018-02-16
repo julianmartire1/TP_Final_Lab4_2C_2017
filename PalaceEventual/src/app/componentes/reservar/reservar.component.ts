@@ -13,15 +13,25 @@ export class ReservarComponent implements OnInit {
   arrayMesa1: Array<any>;
   arrayMesa2: Array<any>;
   local : string = "";
-  mesa;
-  invitado;
+  mesa : any="";
+  invitado ="";
   bandera=false;
   fecha : string = "";
   listado=false;
+  resuelto;
+  spinner :boolean= false;
   constructor(public mihttp : MihttpService,public miRouter : Router) {
     this.arrayMesa1 = new Array<any>();
     this.arrayMesa2 = new Array<any>();
+    this.spinner=true;
   }
+
+  resolved(captchaResponse: string) {
+    console.log(`Resolved captcha with response ${captchaResponse}:`);
+    if(captchaResponse != null)
+      this.resuelto=true;
+    else this.resuelto=false;
+}
 
   agregar() {
     this.bandera=true;
@@ -61,6 +71,7 @@ export class ReservarComponent implements OnInit {
   {/*
     console.log("RESERVAS",this.reserva);
     return;/*/
+    this.spinner=false;
     this.reserva.cliente = localStorage.getItem("usuario");
     this.reserva.local = this.local;
     this.reserva.fecha = this.fecha;
@@ -75,6 +86,7 @@ export class ReservarComponent implements OnInit {
     let obj = { "reserva": this.reserva };
     this.mihttp.reservar(obj,"http://localhost/servidor/BackEnd-PHP-jwt/api/reservar/")
     .then(res => {
+      this.spinner=true;
       console.log("DESDE API",res);
       alert(res["RESULTADO"]);
       this.miRouter.navigate(["/Principal"]);

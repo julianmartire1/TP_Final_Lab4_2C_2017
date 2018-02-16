@@ -27,7 +27,7 @@
                         <span class="anchor" id="formLogin"></span>
 
                         <!-- form card login -->
-                        <div class="card rounded-0">
+                        <div class="card rounded-0" style="border-radius:5px !important;">
                             <div class="card-header">
                                 <h2 class="mb-0" style="text-align:center">Iniciar sesión</h2>
                             </div>
@@ -65,7 +65,18 @@
             </div>
             <!--/col-->
         </div>
-        <!--/row-->
+        <br>
+        <br>
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <button class="btn btn-large btn-block btn-danger" (click)="invitado()">Invitado!!!¿No sabes como llegar?</button>
+                </div>
+            </div>
+            <app-mapa-invitado [local]="local" *ngIf="local != ''"></app-mapa-invitado>
+        </div>
     </div>
 </div>
-<app-spinner style="position: absolute;width: 300px;height: 200px;z-index: 15;top: 50%;left: 50%;margin: -100px 0 0 -150px;" *ngIf="!spinner"></app-spinner>
+<app-spinner style="position: absolute;width: 300px;height: 200px;z-index: 15;top: 50%;left: 50%;margin: -100px 0 0 -150px;"
+    *ngIf="!spinner"></app-spinner>

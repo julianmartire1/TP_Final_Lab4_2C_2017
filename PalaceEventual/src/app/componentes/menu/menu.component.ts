@@ -18,6 +18,7 @@ tipoDeUsuario;
   {
     localStorage.removeItem("usuario");
     localStorage.removeItem("token");
+    localStorage.removeItem("tipo");
     this.router.navigate(["/Login"]);
   }
 

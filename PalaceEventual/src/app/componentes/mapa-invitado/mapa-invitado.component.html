@@ -1,0 +1,45 @@
+<br>
+<br>
+<div class="container" style="background-color: white;
+padding: 20px;
+border-radius:5px">
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-12 mx-auto">
+          <span class="anchor" id="formLogin"></span>
+          <div class="card rounded-0" style="border-radius:5px !important;">
+            <div class="card-header">
+              <h2 class="mb-0" style="text-align:center">Invitado!!!¿No sabes como llegar?</h2>
+            </div>
+            <div class="card-body">
+              <p>Seguramente el que organizó el evento te entregó un número de fiesta para que puedas saber como ir. Ingresa
+                el número y fijate como ir desde tu ubicación</p>
+              <div class="form-group">
+                <input type="number" [(ngModel)]="numeroF" class="form-control form-control-sm" placeholder="Numero de fiesta">
+              </div>
+              <div class="form-group">
+                  <label for="localDestino">Modo de viaje</label>
+                  <select [(ngModel)]="viaje" class="form-control form-control-sm">
+                    <option value="WALKING">Caminando (Por defecto)</option>
+                    <option value="DRIVING">En auto</option>
+                    <option value="BICYCLING">En bicileta</option>
+                    <option value="TRANSIT">Transporte Publico</option>
+                  </select>
+                </div>
+              <button type="button" class="btn btn-success btn-lg float-right" (click)="numeroFiesta()" [disabled]="numeroF == 0">Como llegar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ngui-map zoom="13" center="">
+    <directions-renderer [suppressMarkers]="true" [draggable]="true" panel="#my-panel" (directions_changed)="directionsChanged()"
+      [directions-request]="direction">
+    </directions-renderer>
+  </ngui-map>
+  <div id="my-panel"></div>
+</div>

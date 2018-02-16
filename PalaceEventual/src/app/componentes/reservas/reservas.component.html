@@ -25,6 +25,9 @@
     <button type="button" class="btn btn-large btn-block btn-primary" (click)="listado()" [disabled]="buscar ==''">Mostrar Listado</button>
     <br>
     <div *ngIf="bandera">
+        <div class="alert alert-primary" role="alert">
+            Entragale este numero de reservas ( {{buscar}} ) a tus invitados para que puedan llegar al local.
+          </div>
       <!--<button class="btn btn-large btn-block btn-danger" (click)="cancelarReserva()">Cancelar Reserva</button>-->
       <button class="btn btn-large btn-block btn-danger" data-toggle="modal" data-target="#eliminarReserva" *ngIf="tipo !='empleado'">Cancelar Reserva</button>
       <br>

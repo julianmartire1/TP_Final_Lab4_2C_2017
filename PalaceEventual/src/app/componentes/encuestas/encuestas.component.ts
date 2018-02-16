@@ -15,6 +15,7 @@ export class EncuestasComponent implements OnInit {
   diversion = "";
   alimentos = "";
   local = "";
+  numero = "";
   perfil;
   encuestas: Array<any>;
   mostrarGraficos: boolean = false;
@@ -31,9 +32,13 @@ export class EncuestasComponent implements OnInit {
   };
   public barChartType: string = 'bar';
   public barChartLegend: boolean = true;
-  public barChartLabels: string[] = ['Satisfaccion del evento', 'Satisfaccion con estacionamiento', 'Satisfaccion programa', 'Satisfaccion diversion', 'Satisfaccion alimentos y bebidas'];
+  public barChartLabels: string[] = ['Satisfaccion del evento'];
+  public barChartLabels2: string[] = ['Satisfaccion con estacionamiento', 'Satisfaccion programa'];
+  public barChartLabels3: string[] = ['Satisfaccion diversion', 'Satisfaccion alimentos y bebidas'];
   public barChartData: any[];
-  constructor(public http: MihttpService,public router : Router) { }
+  public barChartData2: any[];
+  public barChartData3: any[];
+  constructor(public http: MihttpService, public router: Router) { }
 
   ngOnInit() {
     this.perfil = localStorage.getItem("tipo");
@@ -47,6 +52,7 @@ export class EncuestasComponent implements OnInit {
   enviarEncuesta() {
     this.spinner = false;
     let obj = {
+      numero : this.numero,
       evento: this.evento,
       estacionamiento: this.estacionamiento,
       programa: this.programa,
@@ -55,11 +61,13 @@ export class EncuestasComponent implements OnInit {
     };
     this.http.enviarEncuesta(obj, "http://localhost/servidor/BackEnd-PHP-jwt/api/guardarEncuesta/")
       .then(res => {
-        console.log(res);
+        //console.log(res);
         if (res["Agregado"] == "true")
           alert("Se a guardado su encuesta!!!Gracias.");
         if (res["Agregado"] == "false")
           alert("Algo salio mal :(");
+        else
+          alert(res["Agregado"]);
         this.spinner = true;
         this.router.navigate(["/Principal"]);
       })
@@ -75,12 +83,24 @@ export class EncuestasComponent implements OnInit {
       .then(datos => {
 
         this.encuestas = datos["FECHA"];
-        console.log(this.encuestas);
         this.barChartData = [
-          { data: [this.contarBMM('evento')[0], this.contarBMM('estacionamiento')[0], this.contarBMM('programa')[0], this.contarBMM('diversion')[0], this.contarBMM('alimentos')[0]], label: 'Bueno' },
-          { data: [this.contarBMM('evento')[1], this.contarBMM('estacionamiento')[1], this.contarBMM('programa')[1], this.contarBMM('diversion')[1], this.contarBMM('alimentos')[1]], label: 'Medio' },
-          { data: [this.contarBMM('evento')[2], this.contarBMM('estacionamiento')[2], this.contarBMM('programa')[2], this.contarBMM('diversion')[2], this.contarBMM('alimentos')[2]], label: 'Malo' }
+          { data: [this.contarBMM('evento')[0]], label: 'Bueno' },
+          { data: [this.contarBMM('evento')[1]], label: 'Medio' },
+          { data: [this.contarBMM('evento')[2]], label: 'Malo' }
         ];
+        //console.log("1",this.barChartData);
+        this.barChartData2 = [
+          { data: [this.contarBMM('estacionamiento')[0], this.contarBMM('programa')[0]], label: 'Bueno' },
+          { data: [this.contarBMM('estacionamiento')[1], this.contarBMM('programa')[1]], label: 'Medio' },
+          { data: [this.contarBMM('estacionamiento')[2], this.contarBMM('programa')[2]], label: 'Malo' }
+        ];
+        //console.log("2",this.barChartData2);
+        this.barChartData3 = [
+          { data: [ this.contarBMM('diversion')[0], this.contarBMM('alimentos')[0]], label: 'Bueno' },
+          { data: [ this.contarBMM('diversion')[1], this.contarBMM('alimentos')[1]], label: 'Medio' },
+          { data: [ this.contarBMM('diversion')[2], this.contarBMM('alimentos')[2]], label: 'Malo' }
+        ];
+        //console.log("3",this.barChartData3);
         /*
               this.pieChartData = [this.contarSiNo('recomendariaServicio')[0], this.contarSiNo('recomendariaServicio')[1]];
               this.pieChartData2 = [this.contarSiNo('recomendariaMShopper')[0], this.contarSiNo('recomendariaMShopper')[1]];
@@ -109,7 +129,6 @@ export class EncuestasComponent implements OnInit {
         malos++;
       }
     }
-    console.log([buenos, medios, malos]);
     return [buenos, medios, malos];
   }
 
