@@ -27,6 +27,7 @@ export class ReservasComponent implements OnInit {
   invitadoModificado ="";
   mesaModificado="";
   tipo;
+  nofechas=false;
   constructor(public mihttp: MihttpService,public miRouter : Router) {
     this.tipo = localStorage.getItem("tipo");
   }
@@ -39,7 +40,7 @@ export class ReservasComponent implements OnInit {
       idReserva: this.buscar
     };
 
-    this.mihttp.eliminarInvitado(obj, "http://localhost/servidor/BackEnd-PHP-jwt/api/agregarInvitado/")
+    this.mihttp.eliminarInvitado(obj, "/agregarInvitado/")
     .then(data => {
       console.log(data);
       this.listado();
@@ -52,7 +53,7 @@ export class ReservasComponent implements OnInit {
     let otro = {
       invitado: obj
     };
-    this.mihttp.eliminarInvitado(otro, "http://localhost/servidor/BackEnd-PHP-jwt/api/eliminarInvitado/")
+    this.mihttp.eliminarInvitado(otro, "/eliminarInvitado/")
       .then(data => {
         console.log(data);
         this.listado();
@@ -71,7 +72,7 @@ export class ReservasComponent implements OnInit {
         fecha: this.buscar
       };
       //console.log(obj);
-      this.mihttp.reservasCliente(obj, "http://localhost/servidor/BackEnd-PHP-jwt/api/reservaEncargado/")
+      this.mihttp.reservasCliente(obj, "/reservaEncargado/")
       .then(data => {
         //console.log(data);
         this.reserva = data["Reserva"];
@@ -91,7 +92,7 @@ export class ReservasComponent implements OnInit {
         cliente: cliente
       };
       //console.log(obj);
-      this.mihttp.reservasCliente(obj, "http://localhost/servidor/BackEnd-PHP-jwt/api/reservaCliente/")
+      this.mihttp.reservasCliente(obj, "/reservaCliente/")
       .then(data => {
         //console.log(data);
         this.reserva = data["Reserva"];
@@ -120,7 +121,7 @@ export class ReservasComponent implements OnInit {
       mesa: this.mesaModificado
     };
 
-    this.mihttp.modificarInvitado(obj, "http://localhost/servidor/BackEnd-PHP-jwt/api/modificarInvitado/")
+    this.mihttp.modificarInvitado(obj, "/modificarInvitado/")
     .then(data => {
       console.log(data);
       this.listado();
@@ -136,7 +137,7 @@ export class ReservasComponent implements OnInit {
     };
     //console.log(obj);
     //return;
-    this.mihttp.httpDeletePromise("http://localhost/servidor/BackEnd-PHP-jwt/api/eliminarReserva/",obj)
+    this.mihttp.httpDeletePromise("/eliminarReserva/",obj)
     .then(res => {
       let respuesta = res["Eliminada"];
       if(respuesta == "true")
@@ -157,10 +158,14 @@ export class ReservasComponent implements OnInit {
     let tipo = localStorage.getItem("tipo");
     if(tipo == "encargado" || tipo == "empleado")
     {
-      this.mihttp.traerTodasLasReservas("http://localhost/servidor/BackEnd-PHP-jwt/api/traerTodasLasReservas/")
+      this.mihttp.traerTodasLasReservas("/traerTodasLasReservas/")
         .then(data => {
-          console.log(data);
           this.fechas = data["FECHA"];
+          console.log(this.fechas);
+          if(this.fechas == null || this.fechas=="")
+          {
+            this.nofechas=true;
+          }
           this.spinner=true;
         })
         .catch(err => {
@@ -174,10 +179,14 @@ export class ReservasComponent implements OnInit {
       let obj = {
         cliente: cliente
       };
-      this.mihttp.reservasCliente(obj, "http://localhost/servidor/BackEnd-PHP-jwt/api/fechaReservaCliente/")
+      this.mihttp.reservasCliente(obj, "/fechaReservaCliente/")
         .then(data => {
-          console.log(data);
           this.fechas = data["FECHA"];
+          console.log(this.fechas);
+          if(this.fechas == null || this.fechas=="")
+          {
+            this.nofechas=true;
+          }
           this.spinner=true;
         })
         .catch(err => {
@@ -192,7 +201,7 @@ export class ReservasComponent implements OnInit {
 
   downloadPdf() {
     var columns = [
-      {title: "ID", dataKey: "idInvitado"},
+      {title: "Numero de Invitado", dataKey: "idInvitado"},
       {title: "NOMBRE", dataKey: "nombre"},
       {title: "MESA", dataKey: "mesa"}
     ];    

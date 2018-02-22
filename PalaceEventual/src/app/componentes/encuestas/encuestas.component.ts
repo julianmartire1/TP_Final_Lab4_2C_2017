@@ -59,14 +59,14 @@ export class EncuestasComponent implements OnInit {
       diversion: this.diversion,
       alimentos: this.alimentos
     };
-    this.http.enviarEncuesta(obj, "http://localhost/servidor/BackEnd-PHP-jwt/api/guardarEncuesta/")
+    this.http.enviarEncuesta(obj, "/guardarEncuesta/")
       .then(res => {
         //console.log(res);
         if (res["Agregado"] == "true")
           alert("Se a guardado su encuesta!!!Gracias.");
         if (res["Agregado"] == "false")
           alert("Algo salio mal :(");
-        else
+          if(res["Agregado"] != "false" || res["Agregado"] != "true")
           alert(res["Agregado"]);
         this.spinner = true;
         this.router.navigate(["/Principal"]);
@@ -79,7 +79,7 @@ export class EncuestasComponent implements OnInit {
 
   leerTodos() {
     this.spinner = false;
-    this.http.leerEncuestas("http://localhost/servidor/BackEnd-PHP-jwt/api/leerEncuestas/")
+    this.http.leerEncuestas("/leerEncuestas/")
       .then(datos => {
 
         this.encuestas = datos["FECHA"];

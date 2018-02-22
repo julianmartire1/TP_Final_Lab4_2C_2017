@@ -26,6 +26,9 @@ tipoDeUsuario;
   {
     this.router.navigate(["/Reservar"]);
   }
+  home2(){
+    this.router.navigate(["/Home"]);
+  }
 
   misReservas()
   {

@@ -28,13 +28,16 @@
 -->
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" (click)="home()">MENU</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <a class="navbar-brand" (click)="home2()">PALACE EVENTUAL</a>
+    <button *ngIf="tipoDeUsuario != null" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
   
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+            <a class="nav-link " (click)="home()" *ngIf="tipoDeUsuario != null">Funciones</a>
+        </li>
           <li class="nav-item active" *ngIf="tipoDeUsuario == 'cliente'" >
               <a class="nav-link " (click)="reservar()">Reservar</a>
             </li>
@@ -49,7 +52,7 @@
             </li>
       </ul>
       <form class="form-inline my-2 my-lg-0">
-          <button class="btn btn-outline-danger my-2 my-sm-0" (click)="cerrarSesion()">Cerrar Sesión</button>
+          <button class="btn btn-outline-danger my-2 my-sm-0" (click)="cerrarSesion()" *ngIf="tipoDeUsuario != null">Cerrar Sesión</button>
       </form>
     </div>
   </nav>

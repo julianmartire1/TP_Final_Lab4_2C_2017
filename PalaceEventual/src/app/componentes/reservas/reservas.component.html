@@ -3,150 +3,171 @@
   <br>
   <br>
   <div class="container" style="background:white;border-radius:4px">
-
-    <div style="display:block;float:left">
+    <div *ngIf="nofechas == true">
+      <h1>No tiene ninguna reserva</h1>
+    </div>
+    <div *ngIf="nofechas == false">
+      <div style="display:block;float:left">
         <h1 *ngIf="tipo == 'cliente' ">Mis reservas </h1>
         <h1 *ngIf="tipo != 'cliente' ">Reservas </h1>
-    </div>
-    <div style="display:block;float:right;padding:10px" *ngIf="bandera">
-      <img class="pdf" src="./../../../../assets/img/pdf.png" (click)="downloadPdf()" height="42" width="42">
-      <img class="pdf" src="./../../../assets/img/excel.ico" (click)="generarCsv()" height="42" width="42">
-    </div>
-    <br>
-    <br>
-    <br>
-    <div class="form-group">
-      <label for="exampleSelect1">Selecciona reserva</label>
-      <select class="form-control" [(ngModel)]="buscar">
-        <option *ngFor="let item of fechas" [value]="item.idReserva">{{item.fecha}} | {{item.local}} | num. res.: {{item.idReserva}}</option>
-      </select>
-    </div>
+      </div>
+      <div style="display:block;float:right;padding:10px" *ngIf="bandera">
+        <img class="pdf" src="./../../../../assets/img/pdf.png" (click)="downloadPdf()" height="42" width="42">
+        <img class="pdf" src="./../../../assets/img/excel.ico" (click)="generarCsv()" height="42" width="42">
+      </div>
+      <br>
+      <br>
+      <br>
+      <div class="form-group">
+        <label for="exampleSelect1">Selecciona reserva</label>
+        <select class="form-control" [(ngModel)]="buscar">
+          <option *ngFor="let item of fechas" [value]="item.idReserva">{{item.fecha}} | {{item.local}} | num. res.: {{item.idReserva}}</option>
+        </select>
+      </div>
 
-    <button type="button" class="btn btn-large btn-block btn-primary" (click)="listado()" [disabled]="buscar ==''">Mostrar Listado</button>
-    <br>
-    <div *ngIf="bandera">
+      <button type="button" class="btn btn-large btn-block btn-primary" (click)="listado()" [disabled]="buscar ==''">Mostrar Listado</button>
+      <br>
+      <div *ngIf="bandera">
         <div class="alert alert-primary" role="alert">
-            Entragale este numero de reservas ( {{buscar}} ) a tus invitados para que puedan llegar al local.
-          </div>
-      <!--<button class="btn btn-large btn-block btn-danger" (click)="cancelarReserva()">Cancelar Reserva</button>-->
-      <button class="btn btn-large btn-block btn-danger" data-toggle="modal" data-target="#eliminarReserva" *ngIf="tipo !='empleado'">Cancelar Reserva</button>
-      <br>
-      <table class="table">
-        <thead class="thead-dark">
-          <tr>
-            <th scope="col">Invitado</th>
-            <th scope="col">Mesa</th>
-            <th scope="col" *ngIf="tipo !='empleado'">Acción</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of reserva">
-            <td>{{item.nombre}}</td>
-            <td>{{item.mesa}}</td>
-            <td style="text-align:center" *ngIf="tipo !='empleado'">
-              <button class="btn btn-outline-danger" (click)="eliminar(item.idInvitado)">Eliminar</button>
-              <button class="btn btn-outline-warning" data-toggle="modal" data-target="#modificarInvitado" (click)="modal(item)">Modificar</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <br>
+          Entragale este número de reserva ( {{buscar}} ) a tus invitados para que puedan llegar al local.
+        </div>
+        <!--<button class="btn btn-large btn-block btn-danger" (click)="cancelarReserva()">Cancelar Reserva</button>-->
+        <button class="btn btn-large btn-block btn-danger" data-toggle="modal" data-target="#eliminarReserva" *ngIf="tipo !='empleado'">Cancelar Reserva</button>
+        <br>
+        <table class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Invitado</th>
+              <th scope="col">Mesa</th>
+              <th scope="col" *ngIf="tipo !='empleado'">Acción</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of reserva">
+              <td>{{item.nombre}}</td>
+              <td>{{item.mesa}}</td>
+              <td style="text-align:center" *ngIf="tipo !='empleado'">
+                <button class="btn btn-outline-danger" (click)="eliminar(item.idInvitado)">Eliminar</button>
+                <button class="btn btn-outline-warning" data-toggle="modal" data-target="#modificarInvitado" (click)="modal(item)">Modificar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <br>
 
-      <!-- AGREGAR INVITADO -->
-      <button type="button" class="btn btn-large btn-block btn-success" data-toggle="modal" data-target="#exampleModal" *ngIf="tipo !='empleado'">
-        Agregar Invitado
-      </button>
+        <!-- AGREGAR INVITADO -->
+        <button type="button" class="btn btn-large btn-block btn-success" data-toggle="modal" data-target="#exampleModal" *ngIf="tipo !='empleado'">
+          Agregar Invitado
+        </button>
 
-      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <div class="form-group">
-                <label>Invitado</label>
-                <input type="text" class="form-control" placeholder="Nombre completo" [(ngModel)]="invitado">
-                <br>
-                <label>Mesa</label>
-                <select class="form-control" [(ngModel)]="mesa">
-                  <option>1</option>
-                  <option>2</option>
-                </select>
-                <br>
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Agregar Invitado</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="form-group">
+                  <label>Invitado</label>
+                  <input type="text" class="form-control" placeholder="Nombre completo" [(ngModel)]="invitado">
+                  <br>
+                  <label>Mesa</label>
+                  <select class="form-control" [(ngModel)]="mesa">
+                      <option>1</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4</option>
+                      <option>5</option>
+                      <option>6</option>
+                      <option>7</option>
+                      <option>8</option>
+                      <option>9</option>
+                      <option>10</option>
+                  </select>
+                  <br>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="agregarInvitado()" [disabled]="invitado == '' || mesa == ''">Agregar</button>
               </div>
             </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-              <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="agregarInvitado()" [disabled]="invitado == '' || mesa == ''">Agregar</button>
-            </div>
           </div>
         </div>
-      </div>
 
-      <!-- -->
+        <!-- -->
 
-      <!--  MODIFICAR INVITADO -->
-      <div class="modal fade" id="modificarInvitado" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <div class="form-group">
-                <label>Invitado</label>
-                <input type="text" class="form-control" placeholder="Nombre completo" [(ngModel)]="invitadoModificado" value={{modalInvitado.nombre}}>
-                <br>
-                <label>Mesa</label>
-                <select class="form-control" [(ngModel)]="mesaModificado">
-                  <option>1</option>
-                  <option>2</option>
-                </select>
-                <br>
+        <!--  MODIFICAR INVITADO -->
+        <div class="modal fade" id="modificarInvitado" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modificar Invitado</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="form-group">
+                  <label>Invitado</label>
+                  <input type="text" class="form-control" placeholder="Nombre completo" [(ngModel)]="invitadoModificado" value={{modalInvitado.nombre}}>
+                  <br>
+                  <label>Mesa</label>
+                  <select class="form-control" [(ngModel)]="mesaModificado">
+                      <option>1</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4</option>
+                      <option>5</option>
+                      <option>6</option>
+                      <option>7</option>
+                      <option>8</option>
+                      <option>9</option>
+                      <option>10</option>
+                    </select>
+                  <br>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-warning" data-dismiss="modal" (click)="modificarInvitado(modalInvitado.idInvitado)"
+                  [disabled]="invitadoModificado == '' || mesaModificado == ''">Modificar</button>
               </div>
             </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-              <button type="button" class="btn btn-warning" data-dismiss="modal" (click)="modificarInvitado(modalInvitado.idInvitado)"
-                [disabled]="invitadoModificado == '' || mesaModificado == ''">Modificar</button>
+          </div>
+        </div>
+
+        <!-- -->
+
+        <!-- ElIMINAR RESERVA -->
+        <div class="modal fade" id="eliminarReserva" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Eliminar Reserva</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                ¿Está seguro que quiere eliminar la reserva?.
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-danger" (click)="cancelarReserva()" data-dismiss="modal">Eliminar</button>
+              </div>
             </div>
           </div>
         </div>
+        <!-- -->
+        <br>
+        <br>
       </div>
-
-      <!-- -->
-
-      <!-- ElIMINAR RESERVA -->
-      <div class="modal fade" id="eliminarReserva" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Eliminar Reserva</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              ¿Está seguro que quiere eliminar la reserva?.
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-              <button type="button" class="btn btn-danger" (click)="cancelarReserva()" data-dismiss="modal">Eliminar</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- -->
-      <br>
-      <br>
     </div>
   </div>
 </div>
-<app-spinner style="position: absolute;width: 300px;height: 200px;z-index: 15;top: 50%;left: 50%;margin: -100px 0 0 -150px;" *ngIf="!spinner"></app-spinner>
+<app-spinner style="position: absolute;width: 300px;height: 200px;z-index: 15;top: 50%;left: 50%;margin: -100px 0 0 -150px;"
+  *ngIf="!spinner"></app-spinner>

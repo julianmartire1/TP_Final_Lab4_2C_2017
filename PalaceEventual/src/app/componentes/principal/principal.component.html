@@ -20,11 +20,11 @@
 
         <ul class="list-group">
             <div *ngIf="tipoDeUsuario == 'cliente'">
-                <li class="list-group-item" style="" (click)="misReservas()">
+                <li class="list-group-item"  (click)="misReservas()">
                     <a>
                         <div class="media">
                             <div class="media-left">
-                                <img src="../../../assets/img/reservas.jpg" class="media-object imagenDeMenu">
+                                <img src="./assets/img/reservas.jpg" class="media-object imagenDeMenu" style="margin-right: 10px;border-radius: 5%;">
                             </div>
                             <div class="media-body">
                                 <h4 class="media-heading">Mis reservas</h4>
@@ -36,11 +36,11 @@
                         </div>
                     </a>
                 </li>
-                <li class="list-group-item" style="" (click)="reservar()">
+                <li class="list-group-item"  (click)="reservar()">
                     <a>
                         <div class="media">
                             <div class="media-left">
-                                <img src="../../../assets/img/lista.jpg" class="media-object imagenDeMenu">
+                                <img src="./assets/img/lista.jpg" class="media-object imagenDeMenu" style="margin-right: 10px;border-radius: 5%;">
                             </div>
                             <div class="media-body">
                                 <h4 class="media-heading">Reservar local</h4>
@@ -53,11 +53,11 @@
                         </div>
                     </a>
                 </li>
-                <li class="list-group-item" style="" (click)="encuestas()">
+                <li class="list-group-item"  (click)="encuestas()">
                     <a>
                         <div class="media">
                             <div class="media-left">
-                                <img src="../../../assets/img/encuesta.png" class="media-object imagenDeMenu">
+                                <img src="./assets/img/encuesta.png" class="media-object imagenDeMenu" style="margin-right: 10px;border-radius: 5%;">
                             </div>
                             <div class="media-body">
                                 <h4 class="media-heading">Completa nuestra encuesta</h4>
@@ -70,11 +70,11 @@
                 </li>
             </div>
             <div *ngIf="tipoDeUsuario == 'encargado'">
-                <li class="list-group-item" style="" (click)="misReservas()">
+                <li class="list-group-item"  (click)="misReservas()">
                     <a>
                         <div class="media">
                             <div class="media-left">
-                                <img src="../../../assets/img/lista.jpg" class="media-object imagenDeMenu">
+                                <img src="./assets/img/lista.jpg" class="media-object imagenDeMenu" style="margin-right: 10px;border-radius: 5%;">
                             </div>
                             <div class="media-body">
                                 <h4 class="media-heading">Reservas</h4>
@@ -87,11 +87,11 @@
                         </div>
                     </a>
                 </li>
-                <li class="list-group-item" style="" (click)="encuestas()">
+                <li class="list-group-item"  (click)="encuestas()">
                         <a>
                             <div class="media">
                                 <div class="media-left">
-                                    <img src="../../../assets/img/encuesta.png" class="media-object imagenDeMenu">
+                                    <img src="./assets/img/encuesta.png" class="media-object imagenDeMenu" style="margin-right: 10px;border-radius: 5%;">
                                 </div>
                                 <div class="media-body">
                                     <h4 class="media-heading">Ver Estadisticas</h4>
@@ -104,11 +104,11 @@
                     </li>
             </div>
             <div *ngIf="tipoDeUsuario == 'empleado'">
-                <li class="list-group-item" style="" (click)="misReservas()">
+                <li class="list-group-item" (click)="misReservas()">
                     <a>
                         <div class="media">
                             <div class="media-left">
-                                <img src="../../../assets/img/lista.jpg" class="media-object imagenDeMenu">
+                                <img src="./assets/img/lista.jpg" class="media-object imagenDeMenu" style="margin-right: 10px;border-radius: 5%;">
                             </div>
                             <div class="media-body">
                                 <h4 class="media-heading">Reservas</h4>

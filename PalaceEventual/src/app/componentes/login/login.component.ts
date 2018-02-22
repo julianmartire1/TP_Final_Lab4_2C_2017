@@ -61,7 +61,7 @@ export class LoginComponent implements OnInit {
     let obj={
       numero : this.numeroF
     };
-    this.servicio.post(obj,"http://localhost/servidor/BackEnd-PHP-jwt/api/numeroFiesta/")
+    this.servicio.post(obj,"/numeroFiesta/")
     .then( data => {
       this.spinner=true;
       if(data["Local"].length > 0 )
@@ -87,7 +87,7 @@ export class LoginComponent implements OnInit {
       clave : cliente.clave
     };
 
-    this.servicio.post(obj,"http://localhost/servidor/BackEnd-PHP-jwt/api/ingreso/")
+    this.servicio.post(obj,"/ingreso/")
     .then( data => {
       this.spinner=true;
       console.log(data);

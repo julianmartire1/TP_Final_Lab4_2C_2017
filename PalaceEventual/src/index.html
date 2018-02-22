@@ -16,15 +16,65 @@
     crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4"
     crossorigin="anonymous"></script>
-    
+  <script>
+    $(window).scroll(function () {
+      $('#phone').each(function () {
+        var imagePos = $(this).offset().top;
+
+        var topOfWindow = $(window).scrollTop();
+        if (imagePos < topOfWindow + 400) {
+          $(this).addClass("slideUp");
+        }
+      });
+
+      $('#pin').each(function () {
+        var imagePos = $(this).offset().top;
+
+        var topOfWindow = $(window).scrollTop();
+        if (imagePos < topOfWindow + 400) {
+          $(this).addClass("hatch");
+        }
+      });
+
+      $('#pop-up-message').each(function () {
+        var imagePos = $(this).offset().top;
+
+        var topOfWindow = $(window).scrollTop();
+        if (imagePos < topOfWindow + 400) {
+          $(this).addClass("slideExpandUp");
+        }
+      });
+
+      $('#example-4').each(function () {
+        var imagePos = $(this).offset().top;
+
+        var topOfWindow = $(window).scrollTop();
+        if (imagePos < topOfWindow + 400) {
+          $('.device-arrow').addClass("stretchRight");
+        }
+      });
+
+      $('#example-5').each(function () {
+        var imagePos = $(this).offset().top;
+
+        var topOfWindow = $(window).scrollTop();
+        if (imagePos < topOfWindow + 400) {
+          $('.graph-bar').addClass("pullUp");
+        }
+      });
+
+
+    });
+  </script>
 </head>
 
 <body style="background: url('assets/img/evento.jpg')">
   <app-root></app-root>
-  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script>
 
 
- 
+
 </body>
 
 </html>

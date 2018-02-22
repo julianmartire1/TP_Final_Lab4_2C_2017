@@ -11,11 +11,14 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class MihttpService {
 
+  //localhost="http://localhost/servidor/BackEnd-PHP-jwt/api";
+  localhost="/finalapi/api";
   constructor(private http: Http) { }
 
   httpGetPromise(url: string) {
     return this.http
-      .get(url)
+      //.get("/finalapi/api" +  url)
+      .get(this.localhost + url)
       .toPromise()
       .then(this.extraerDatos)
       .catch(this.handleError);
@@ -23,7 +26,8 @@ export class MihttpService {
 
   httpPostPromise(url: string, obj: any) {
     return this.http
-      .post(url, obj)
+      //.post("/finalapi/api" +  url, obj)
+      .post(this.localhost + url,obj)
       .toPromise()
       .then(this.extraerDatos)
       .catch(this.handleError);
@@ -31,14 +35,17 @@ export class MihttpService {
 
   httpDeletePromise(url: string, obj: any) {
     return this.http
-      .delete(url, new RequestOptions({ body: obj }))
+      //.delete("/finalapi/api" +  url, new RequestOptions({ body: obj }))
+      .delete(this.localhost +  url, new RequestOptions({ body: obj }))
       .toPromise()
       .then(this.extraerDatos)
       .catch(this.handleError);
   }
 
   post(data: Object, url: string) {
-    return this.http.post(url, data)
+    return this.http
+      //.post("/finalapi/api" +  url, data)
+      .post(this.localhost + url,data)
       .toPromise()
       .then(this.extraerDatos)
       .catch(this.handleError);
@@ -57,28 +64,36 @@ export class MihttpService {
   }*/
 
   registrar(data: Object, url: string){
-    return this.http.post(url, data)
+    return this.http
+    //.post("/finalapi/api" +  url, data)
+    .post(this.localhost + url,data)
     .toPromise()
     .then(this.extraerDatos)
     .catch(this.handleError);
   }
 
   reservar(data: Object, url: string){
-    return this.http.post(url, data)
+    return this.http
+    //.post("/finalapi/api" +  url, data)
+    .post(this.localhost + url,data)
     .toPromise()
     .then(this.extraerDatos)
     .catch(this.handleError);
   }
 
   eliminarInvitado(data: Object, url: string){
-    return this.http.post(url, data)
+    return this.http
+    //.post("/finalapi/api" +  url, data)
+    .post(this.localhost + url,data)
     .toPromise()
     .then(this.extraerDatos)
     .catch(this.handleError);
   }
 
   modificarInvitado(data: Object, url: string){
-    return this.http.post(url, data)
+    return this.http
+    //.post("/finalapi/api" +  url, data)
+    .post(this.localhost + url,data)
     .toPromise()
     .then(this.extraerDatos)
     .catch(this.handleError);
@@ -86,7 +101,9 @@ export class MihttpService {
 
   reservasCliente(data: Object, url: string)
   {
-    return this.http.post(url, data)
+    return this.http
+    //.post("/finalapi/api" +  url, data)
+    .post(this.localhost + url,data)
     .toPromise()
     .then(this.extraerDatos)
     .catch(this.handleError);
@@ -94,7 +111,9 @@ export class MihttpService {
 
   traerTipoDeUsuario(data : Object, url: string)
   {
-    return this.http.post(url, data)
+    return this.http
+    //.post("/finalapi/api" +  url, data)
+    .post(this.localhost + url,data)
     .toPromise()
     .then(this.extraerDatos)
     .catch(this.handleError);
@@ -102,7 +121,8 @@ export class MihttpService {
 
   traerTodasLasReservas(url: string) {
     return this.http
-      .get(url)
+      //.get("/finalapi/api" +  url)
+      .get(this.localhost + url)
       .toPromise()
       .then(this.extraerDatos)
       .catch(this.handleError);
@@ -110,14 +130,17 @@ export class MihttpService {
 
   leerEncuestas(url: string) {
     return this.http
-      .get(url)
+      //.get("/finalapi/api" +  url)
+      .get(this.localhost + url)
       .toPromise()
       .then(this.extraerDatos)
       .catch(this.handleError);
   }
 
   enviarEncuesta(data: Object, url: string){
-    return this.http.post(url, data)
+    return this.http
+    //.post("/finalapi/api" +  url, data)
+    .post(this.localhost + url,data)
     .toPromise()
     .then(this.extraerDatos)
     .catch(this.handleError);

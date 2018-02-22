@@ -4,50 +4,82 @@
   <br>
   <div class="container" style="background:white;border-radius:4px">
     <br>
-    <div class="form-group">
-      <label>Elegir Local</label>
-      <select class="form-control" [(ngModel)]="local">
-        <option>Avellaneda</option>
-        <option>Quilmes</option>
-        <option>Berazategui</option>
-      </select>
-    </div>
-    <br>
-    <div class="form-group">
-      <label>Elegir fecha de reserva</label>
-      <input class="form-control" type="date" [(ngModel)]="fecha">
-    </div>
-    <br>
-    <div class="form-group" style="border-style: solid; border-width: 4px; padding:8px;">
-      <h3 style="text-align:center;background-color:rgba(0,0,0,0.3); padding:3px;border-radius:4px;">Agregar Invitados</h3>
-      <div class="container">
+    <div class="row">
+      <div class="col-sm">
         <div class="form-group">
-          <label>Invitado</label>
-          <input type="text" class="form-control" placeholder="Nombre completo" [(ngModel)]="invitado">
-          <br>
-          <label>Mesa</label>
-          <select class="form-control" [(ngModel)]="mesa">
-            <option>1</option>
-            <option>2</option>
+          <label>Elegir Local</label>
+          <select class="form-control" [(ngModel)]="local">
+            <option>Avellaneda</option>
+            <option>Quilmes</option>
+            <option>Berazategui</option>
           </select>
-          <br>
-          <button class="btn btn-large btn-block btn-warning" [disabled]="invitado == '' || mesa == ''" (click)="agregar()">Agregar</button>
+        </div>
+        <br>
+        <div class="form-group">
+          <label>Elegir fecha de reserva</label>
+          <input class="form-control" type="date" [(ngModel)]="fecha">
+        </div>
+        <br>
+        <div class="form-group" style="border-style: solid; border-width: 4px; padding:8px;">
+          <h3 style="text-align:center;background-color:rgba(0,0,0,0.3); padding:3px;border-radius:4px;">Agregar Invitados</h3>
+          <div class="container">
+            <div class="form-group">
+              <label>Invitado</label>
+              <input type="text" class="form-control" placeholder="Nombre completo" [(ngModel)]="invitado">
+              <br>
+              <label>Mesa</label>
+              <select class="form-control" [(ngModel)]="mesa">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+              </select>
+              <!--<input type="text" class="form-control" placeholder="Nombre completo" [(ngModel)]="mesa">-->
+              <br>
+              <button class="btn btn-large btn-block btn-warning" [disabled]="invitado == '' || mesa == ''" (click)="agregar()">Agregar</button>
+            </div>
+          </div>
+        </div>
+
+        <br>
+      </div>
+      <div class="col-sm" style="border-style: solid;margin-right: 10px;">
+        <h3 style="text-align:center">Listado</h3>
+        <div *ngIf="listado" >
+          <app-listado-invitados [array]="otrareserva"></app-listado-invitados>
         </div>
       </div>
     </div>
-    <br>
+    <div class="row">
+        <div class="col- col-sm">
+      </div>
+      <div class="col- col-sm">
+        <br>
+        <recaptcha (resolved)="resolved($event)" siteKey="6LfJZ0YUAAAAAIz-TnU6DQnpddHdUkBF_FDGCbFe"></recaptcha>
+        <br>
+        <br>
+      </div>
+      <div class="col- col-sm">
+      </div>
 
-    <recaptcha (resolved)="resolved($event)" siteKey="6LfJZ0YUAAAAAIz-TnU6DQnpddHdUkBF_FDGCbFe" class="g-recaptcha"></recaptcha>
-    <br>
-    <br>
-    <button class="btn btn-large btn-block btn-success" [disabled]="arrayMesa1 == null || arrayMesa2 == null || local == '' || fecha == '' || !resuelto"
-      (click)="guardarReserva()">Reservar</button>
-    <br>
 
-    <div *ngIf="listado">
-      <app-listado-invitados [array]="otrareserva"></app-listado-invitados>
-      <div>
-
+    </div>
+    <div class="row">
+      <div class="col-sm">
+        <button class="btn btn-large btn-block btn-success"  (click)="guardarReserva()" [disabled]="arrayMesa1 == null || arrayMesa2 == null || local == '' || fecha == '' || !resuelto"
+        >Reservar</button>
+          <br>
       </div>
     </div>
-    <app-spinner style="position: absolute;width: 300px;height: 200px;z-index: 15;top: 50%;left: 50%;margin: -100px 0 0 -150px;" *ngIf="!spinner"></app-spinner>
+  </div>
+</div>
+<app-spinner style="position: absolute;width: 300px;height: 200px;z-index: 15;top: 50%;left: 50%;margin: -100px 0 0 -150px;"
+  *ngIf="!spinner"></app-spinner>
+
+  <!--[disabled]="arrayMesa1 == null || arrayMesa2 == null || local == '' || fecha == '' || !resuelto"-->

@@ -35,12 +35,18 @@ export class MapaInvitadoComponent implements OnInit {
     let obj={
       numero : this.numeroF
     };
-    this.servicio.post(obj,"http://localhost/servidor/BackEnd-PHP-jwt/api/numeroFiesta/")
+    this.servicio.post(obj,"/numeroFiesta/")
     .then( data => {
       this.spinner=true;
       if(data["Local"].length > 0 )
       {
-        this.local=data["Local"][0]["local"];
+        console.log(data["Local"][0]["local"]);
+        if(data["Local"][0]["local"] == "Quilmes")
+          this.local="-34.720657,-58.254600";
+        if(data["Local"][0]["local"] == "Berazategui")
+          this.local="-34.759160,-58.205168";
+        if(data["Local"][0]["local"] == "Avellaneda")
+          this.local="-34.693013,-58.331757";
         this.mapear();
       }
       else alert("Numero invalido");

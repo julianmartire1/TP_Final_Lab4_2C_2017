@@ -43,8 +43,17 @@
   </div>
 
   <ngui-map zoom="13" center="">
-    <directions-renderer [suppressMarkers]="true" [draggable]="true" panel="#my-panel" (directions_changed)="directionsChanged()"
-     [directions-request]="direction">
+    <directions-renderer [suppressMarkers]="true" [draggable]="true" panel="#my-panel" (directions_changed)="directionsChanged()"  [directions-request]="direction">
+      <marker position="-34.720657,-58.254600"></marker>
+      <marker position="-34.693013,-58.331757"></marker>
+      <marker position="-34.759160, -58.205168"></marker>
+      <marker position="{{direction.origin}}" [icon]="{
+         url: './assets/img/position.png',
+         anchor: [16,16],
+         size: [32,32],
+         scaledSize: [32,32]
+       }">
+      </marker>
     </directions-renderer>
   </ngui-map>
   <div id="my-panel"></div>

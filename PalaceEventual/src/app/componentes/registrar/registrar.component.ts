@@ -24,15 +24,23 @@ export class RegistrarComponent implements OnInit {
       tipo : "cliente"
     };
 
-    this.servicio.registrar(obj,"http://localhost/servidor/BackEnd-PHP-jwt/api/registrar/")
+    this.servicio.registrar(obj,"/registrar/")
     .then( data => {
       this.spinner=true;
       console.log(data);
-      if(data["bandera"] == true)
-        this.router.navigate(["/Login"]);
+      if(data["bandera"] == false)
+      {
+        alert(data["error"]);
+        return;
+      }
+      if(data["datos"]["bandera"] == true)
+        {
+          this.router.navigate(["/Login"]);
+          alert("Cuenta creada con exito");
+        }
       else 
       {
-        if(data["bandera"] == false)
+        if(data["datos"]["bandera"] == false)
           {
             this.router.navigate(["/Login"]);
             alert(data["error"]);

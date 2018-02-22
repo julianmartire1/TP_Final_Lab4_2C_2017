@@ -25,6 +25,7 @@ import { EncuestasComponent } from './componentes/encuestas/encuestas.component'
 import { ChartsModule } from 'ng2-charts';
 import { RecaptchaModule } from 'ng2-recaptcha';
 import { MapaInvitadoComponent } from './componentes/mapa-invitado/mapa-invitado.component';
+import { HomeComponent } from './componentes/home/home.component';
 
 const appRoutes: Routes = [
   //{ path: 'pagina1' , component: Pagina1Component , canActivate: [VerificarJWTService] },
@@ -36,7 +37,8 @@ const appRoutes: Routes = [
   { path: 'Reservas', component: ReservasComponent,canActivate: [VerificarService] },
   { path: 'Encuestas', component: EncuestasComponent,canActivate: [VerificarService] },
   { path: 'Invitado', component: MapaInvitadoComponent },
-  { path: '',   redirectTo: '/Login', pathMatch: 'full' },
+  { path: 'Home', component: HomeComponent },
+  { path: '',   redirectTo: '/Home', pathMatch: 'full' },
   { path: '**', component: ErrorComponent },
   
   //{ path: '',   redirectTo: '/pagina1', pathMatch: 'full' },
@@ -57,7 +59,8 @@ const appRoutes: Routes = [
     MapaComponent,
     SpinnerComponent,
     EncuestasComponent,
-    MapaInvitadoComponent
+    MapaInvitadoComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
