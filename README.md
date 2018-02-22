@@ -1,6 +1,8 @@
 # TP_Final_Lab4_2C_2017
 TP final
 
+PAGINA : https://evento.palaceeventual.pe.hu/Home
+
 # Pasos:
 1) Para realizar una reserva primero debe iniciar sesiónn. Si no tiene una cuenta puede registrarse.
 2) Una vez logeado lo redireccionara a el apartado "Funciones" donde ahí encontra para realizar 
